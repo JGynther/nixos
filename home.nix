@@ -11,8 +11,6 @@
     eza
     bat
 
-    gh
-
     # misc
     wl-clipboard
 
@@ -28,6 +26,11 @@
     userName = "Joona Gynther";
     userEmail = "joona@gynther.xyz";
     extraConfig.init.defaultBranch = "main";
+  };
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
   };
 
   programs.zsh = {
