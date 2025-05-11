@@ -11,6 +11,8 @@
     eza
     bat
 
+    gh
+
     # misc
     wl-clipboard
 
