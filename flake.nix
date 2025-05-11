@@ -5,6 +5,12 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Optional
+    openmw-nix = {
+      url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
