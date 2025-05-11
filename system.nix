@@ -19,6 +19,9 @@
 
   time.timeZone = "Europe/Helsinki";
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_TIME = "fi_FI.UTF-8";
+  };
   console.keyMap = "fi";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
