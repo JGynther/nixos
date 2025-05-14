@@ -14,6 +14,9 @@ in
     p7zip-rar
     momw-tools.tes3cmd
     momw-tools.others
+
+    # FFXIV
+    xivlauncher
   ];
 
   programs.steam.enable = true;
