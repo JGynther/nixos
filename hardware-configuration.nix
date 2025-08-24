@@ -6,6 +6,7 @@
   lib,
   pkgs,
   modulesPath,
+  username,
   ...
 }:
 {
@@ -29,9 +30,14 @@
     fsType = "ext4";
   };
 
-  fileSystems."/mnt/games" = {
+  fileSystems."/mnt/nvme" = {
     device = "/dev/disk/by-uuid/f1c1e6e0-ea2e-4dcc-b1ac-a548b7055435";
     fsType = "ext4";
+  };
+
+  fileSystems."/home/${username}/mlg" = {
+    device = "/mnt/nvme";
+    options = [ "bind" ];
   };
 
   fileSystems."/boot" = {

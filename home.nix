@@ -17,6 +17,9 @@
     # nix
     nixd
     nixfmt-rfc-style
+
+    # python
+    uv
   ];
 
   programs.firefox.enable = true;
