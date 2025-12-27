@@ -23,6 +23,7 @@
     LC_TIME = "fi_FI.UTF-8";
   };
   console.keyMap = "fi";
+  services.xserver.xkb.layout = "fi";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${username}" = {
@@ -33,6 +34,16 @@
     ];
     openssh.authorizedKeys.keys = [
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBdlBStN2bXXCgoF3BfkclTEPYukxeAYlo7YhtxFMeUAjX0uSwAqVRgwbMCroQwEd2HrdIoG42F3582LYM+1pfU= gynther@secretive.MacBook-Air.local"
+    ];
+  };
+
+  nix.settings = {
+    trusted-users = [ "${username}" ];
+    substituters = [
+      "https://nix-community.cachix.org"
+    ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
 
@@ -53,7 +64,8 @@
 
   # Patching Python
   # https://wiki.nixos.org/wiki/Python#Running_Python_packages_which_requires_compilation_and/or_contains_libraries_precompiled_without_nix
-  programs.nix-ld = {
+  /*
+    programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
       stdenv.cc.cc.lib
@@ -61,7 +73,8 @@
       cudaPackages.cudatoolkit
       glibc
     ];
-  };
+    };
+  */
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
