@@ -40,6 +40,7 @@ in {
     ))
 
     # dev
+    clang
     inputs.fenix.packages.${stdenv.hostPlatform.system}.complete.toolchain # rust
     bun
     nodejs_25
