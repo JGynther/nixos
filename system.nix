@@ -3,8 +3,7 @@
   username,
   hostname,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -31,6 +30,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "kvm"
     ];
     openssh.authorizedKeys.keys = [
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBdlBStN2bXXCgoF3BfkclTEPYukxeAYlo7YhtxFMeUAjX0uSwAqVRgwbMCroQwEd2HrdIoG42F3582LYM+1pfU= gynther@secretive.MacBook-Air.local"
@@ -38,7 +38,7 @@
   };
 
   nix.settings = {
-    trusted-users = [ "${username}" ];
+    trusted-users = ["${username}"];
     substituters = [
       "https://nix-community.cachix.org"
     ];
@@ -65,15 +65,15 @@
   # Patching Python
   # https://wiki.nixos.org/wiki/Python#Running_Python_packages_which_requires_compilation_and/or_contains_libraries_precompiled_without_nix
   /*
-    programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      stdenv.cc.cc.lib
-      zlib
-      cudaPackages.cudatoolkit
-      glibc
-    ];
-    };
+  programs.nix-ld = {
+  enable = true;
+  libraries = with pkgs; [
+    stdenv.cc.cc.lib
+    zlib
+    cudaPackages.cudatoolkit
+    glibc
+  ];
+  };
   */
 
   # This value determines the NixOS release from which the default
