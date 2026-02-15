@@ -8,6 +8,7 @@
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.open = true;
+  hardware.nvidia.powerManagement.enable = false;
 
   # Enable audio via PipeWire
   security.rtkit.enable = true;
