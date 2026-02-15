@@ -7,6 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
     # Optional
     # openmw-nix = {
@@ -19,6 +20,7 @@
     nixpkgs,
     home-manager,
     fenix,
+    determinate,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -29,6 +31,7 @@
     nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
       inherit system specialArgs;
       modules = [
+        determinate.nixosModules.default
         ./system.nix
         ./nix.nix
         ./gui.nix
