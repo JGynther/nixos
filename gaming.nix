@@ -1,5 +1,6 @@
 {pkgs, ...}: let
   # momw-tools = pkgs.callPackage ./packages/momw-tools {};
+  awakened-poe = pkgs.callPackage ./packages/poe/awakened.nix {};
 in {
   environment.systemPackages = with pkgs; [
     # Minecraft
@@ -18,6 +19,7 @@ in {
 
     # POE
     rusty-path-of-building
+    awakened-poe
   ];
 
   programs.steam.enable = true;

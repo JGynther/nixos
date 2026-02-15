@@ -2,8 +2,7 @@
   appimageTools,
   fetchurl,
   makeDesktopItem,
-}:
-let
+}: let
   pname = "awakened-poe-trade";
   version = "3.27.101";
 
@@ -22,14 +21,14 @@ let
     ];
   };
 in
-appimageTools.wrapType2 {
-  inherit pname version src;
+  appimageTools.wrapType2 {
+    inherit pname version src;
 
-  extraInstallCommands = ''
-    mkdir -p $out/share/applications
-    cp ${desktopItem}/share/applications/* $out/share/applications
-  '';
-}
-
+    extraInstallCommands = ''
+      mkdir -p $out/share/applications
+      cp ${desktopItem}/share/applications/* $out/share/applications
+    '';
+  }
 # {}
 # sha256:ca2b30edb73f75f83172ac5ba8a5493a2e9a1bb1e9beb143213841683d240299
+
