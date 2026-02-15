@@ -88,6 +88,7 @@ in {
       rebuild = "nh os switch /etc/nixos";
       ls = "eza -F";
       cat = "bat";
+      grep = "rg";
       help = ''
         grep 'alias -- ' ~/.zshrc | sed "s/alias -- //; s/'//g" | awk -F'=' '{printf "\033[1;36m%-10s\033[0m %s\n", $1, $2}'
       '';
