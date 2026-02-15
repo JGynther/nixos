@@ -105,6 +105,7 @@ in {
     enable = true;
     settings = {
       theme = "Catppuccin Mocha";
+      font-family = "Berkeley Mono";
       font-size = 14;
       background-opacity = 0.95;
       background-blur-radius = 20;
@@ -164,7 +165,10 @@ in {
 
       theme = "Catppuccin Mocha";
 
+      ui_font_family = "Berkeley Mono";
       ui_font_size = 16;
+
+      buffer_font_family = "Berkeley Mono";
       buffer_font_size = 16;
     };
   };
