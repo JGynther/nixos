@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   username,
   inputs,
@@ -154,14 +155,45 @@ in {
     enable = true;
     extensions = ["catppuccin"];
     userSettings = {
-      languages = {
-        "Nix" = {
-          language_servers = ["!nil" "nixd"];
-          formatter.external = {
-            command = "alejandra";
-          };
+      format_on_save = "on";
+      prettier = {
+        allowed = false;
+      };
+
+      lsp = {
+        oxlint.initialization_options.settings = {
+          run = "onType";
+          typeAware = true;
         };
       };
+
+      languages =
+        {
+          "Nix" = {
+            language_servers = ["!nil" "nixd"];
+            formatter.external = {
+              command = "alejandra";
+            };
+          };
+          "TypeScript" = {
+            language_servers = ["!eslint" "tsgo" "vtsls"];
+            formatter = [{language_server.name = "oxfmt";}];
+          };
+        }
+        // lib.genAttrs [
+          "JavaScript"
+          "TSX"
+          "Markdown"
+          "HTML"
+          "JSON"
+          "CSS"
+        ] (_: {
+          formatter = [
+            {
+              language_server.name = "oxfmt";
+            }
+          ];
+        });
 
       theme = "Catppuccin Mocha";
 
