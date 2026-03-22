@@ -41,7 +41,7 @@
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = specialArgs;
           home-manager.backupFileExtension = "backup";
-          home-manager.users."${username}" = import ./home.nix;
+          home-manager.users."${username}" = ./home.nix;
         }
       ];
     };
