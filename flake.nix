@@ -1,5 +1,5 @@
 {
-  description = "Year of the linux (gaming) desktop. NixOS!";
+  description = "Year of the linux desktop";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -24,7 +24,7 @@
     ...
   } @ inputs: let
     username = "gynther";
-    hostname = "nixos-gaming";
+    hostname = "hydrogen";
     specialArgs = {inherit inputs username hostname;};
   in {
     nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
