@@ -1,8 +1,11 @@
-{...}: {
-  # Set display stuff
-  services.displayManager.cosmic-greeter.enable = true;
-  services.desktopManager.cosmic.enable = true;
-  services.system76-scheduler.enable = true;
+{pkgs, ...}: {
+  # Niri
+  programs.niri.enable = true;
+  services.greetd = {
+    enable = true;
+    settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
+  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Setup nvidia drivers
   hardware.graphics.enable = true;

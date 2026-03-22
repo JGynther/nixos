@@ -52,7 +52,59 @@ in {
     opentofu
     hcloud
     jujutsu
+
+    # Niri
+    swaybg
+    xwayland-satellite
+    nautilus
   ];
+
+  # Niri
+  xdg.configFile."niri/config.kdl".source = ./niri/config.kdl;
+  programs.fuzzel.enable = true;
+  services.mako.enable = true;
+  programs.waybar = {
+    enable = true;
+    style = ./niri/waybar.css;
+    settings.mainBar = {
+      layer = "top";
+
+      modules-left = ["niri/workspaces"];
+      modules-center = ["niri/window"];
+      modules-right = ["network" "bluetooth" "pulseaudio" "clock"];
+
+      clock = {
+        interval = 1;
+        format = "{:%d.%m. W%V %H:%M:%S}";
+        tooltip-format = "{calendar}";
+        calendar = {
+          mode = "year";
+          mode-mon-col = 4;
+          weeks-pos = "right";
+          format = {
+            months = "<span color='#b4befe'><b>{}</b></span>";
+            days = "<span color='#cdd6f4'>{}</span>";
+            weeks = "<span color='#74c7ec'><b>W{}</b></span>";
+            weekdays = "<span color='#89b4fa'><b>{}</b></span>";
+            today = "<span color='#f38ba8'><b><u>{}</u></b></span>";
+          };
+        };
+      };
+
+      network = {
+        format = "{essid}({signalStrength}%)";
+        tooltip = false;
+      };
+
+      bluetooth = {
+        format = "Bluetooth {status}";
+      };
+
+      pulseaudio = {
+        format = "{volume}%";
+      };
+    };
+  };
 
   programs.firefox.enable = true;
 
