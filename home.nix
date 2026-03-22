@@ -44,6 +44,7 @@ in {
     clang
     inputs.fenix.packages.${stdenv.hostPlatform.system}.complete.toolchain # rust
     bun
+    go
     nodejs_25
     sqlite
     duckdb
