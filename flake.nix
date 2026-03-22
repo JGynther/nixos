@@ -23,13 +23,12 @@
     determinate,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
     username = "gynther";
     hostname = "nixos-gaming";
     specialArgs = {inherit inputs username hostname;};
   in {
     nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
-      inherit system specialArgs;
+      inherit specialArgs;
       modules = [
         determinate.nixosModules.default
         ./system.nix
