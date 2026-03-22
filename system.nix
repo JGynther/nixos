@@ -33,6 +33,7 @@
       "networkmanager"
       "wheel"
       "kvm"
+      "podman"
     ];
     openssh.authorizedKeys.keys = [
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBdlBStN2bXXCgoF3BfkclTEPYukxeAYlo7YhtxFMeUAjX0uSwAqVRgwbMCroQwEd2HrdIoG42F3582LYM+1pfU= gynther@secretive.MacBook-Air.local"
@@ -64,19 +65,14 @@
   # Also enable tailscale for SSH
   services.tailscale.enable = true;
 
-  # Patching Python
-  # https://wiki.nixos.org/wiki/Python#Running_Python_packages_which_requires_compilation_and/or_contains_libraries_precompiled_without_nix
-  /*
-  programs.nix-ld = {
-  enable = true;
-  libraries = with pkgs; [
-    stdenv.cc.cc.lib
-    zlib
-    cudaPackages.cudatoolkit
-    glibc
-  ];
+  programs.nix-ld.enable = true;
+
+  # Containers
+  virtualisation = {
+    containers.enable = true;
+    podman.enable = true;
+    podman.defaultNetwork.settings.dns_enabled = true;
   };
-  */
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
