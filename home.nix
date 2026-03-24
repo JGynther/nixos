@@ -69,7 +69,7 @@ in {
     settings.mainBar = {
       layer = "top";
 
-      modules-left = ["niri/workspaces"];
+      modules-left = ["niri/workspaces" "tray"];
       modules-center = ["niri/window"];
       modules-right = ["network" "bluetooth" "pulseaudio" "clock"];
 
@@ -98,6 +98,7 @@ in {
 
       bluetooth = {
         format = "Bluetooth {status}";
+        tooltip-format = "{device_alias}";
       };
 
       pulseaudio = {

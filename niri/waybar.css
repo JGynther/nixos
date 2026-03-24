@@ -11,7 +11,9 @@ window#waybar {
 }
 
 tooltip {
-  background: #1e1e2e;
+  background: rgba(30, 30, 46, 0.9);
+  border-radius: 1px;
+  border: 1px solid #6c7086;
 }
 
 #clock,
@@ -21,9 +23,10 @@ tooltip {
 #bluetooth,
 #pulseaudio,
 #workspaces {
-  margin: 4px 2px;
-  padding: 4px 12px;
+  margin: 4px;
+  padding: 2px 6px;
   color: #cdd6f4;
+  border: 1px solid transparent;
 }
 
 #clock:hover,
@@ -31,16 +34,16 @@ tooltip {
 #memory:hover,
 #network:hover,
 #bluetooth:hover,
-#pulseaudio:hover,
-#workspaces:hover {
-  background: rgba(30, 30, 46, 0.8);
+#pulseaudio:hover {
+  background: rgba(30, 30, 46, 0.9);
+  border: 1px solid #6c7086;
   border-radius: 1px;
 }
 
 #workspaces button {
   color: #585b70;
-  background: transparent;
-  padding: 0px;
+  font-weight: bold;
+  padding: 2px 6px;
 }
 
 #workspaces button.active {
@@ -48,5 +51,5 @@ tooltip {
 }
 
 #workspaces button.focused {
-  color: #89b4fa;
+  color: #b4befe;
 }
