@@ -61,8 +61,29 @@ in {
 
   # Niri
   xdg.configFile."niri/config.kdl".source = ./niri/config.kdl;
-  programs.fuzzel.enable = true;
+
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        font = "Berkeley Mono";
+      };
+      colors = {
+        background = "1e1e2ee6";
+        text = "cdd6f4ff";
+        match = "b4befeff";
+        selection = "313244ff";
+        selection-text = "cdd6f4ff";
+        selection-match = "b4befeff";
+        border = "6c7086ff";
+        prompt = "cdd6f4ff";
+        input = "cdd6f4ff";
+      };
+    };
+  };
+
   services.mako.enable = true;
+
   programs.waybar = {
     enable = true;
     style = ./niri/waybar.css;
@@ -92,17 +113,17 @@ in {
       };
 
       network = {
-        format = "{essid}({signalStrength}%)";
+        format = "▂▄▆ {essid}({signalStrength}%)";
         tooltip = false;
       };
 
       bluetooth = {
-        format = "Bluetooth {status}";
+        format = "<b>ᛒ</b> {status}";
         tooltip-format = "{device_alias}";
       };
 
       pulseaudio = {
-        format = "{volume}%";
+        format = "<b>♪</b> {volume}%";
       };
     };
   };
