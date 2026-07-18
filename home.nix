@@ -3,16 +3,9 @@
   pkgs,
   username,
   inputs,
+  config,
   ...
-}: let
-  python312WithForcedTorch = pkgs.python312.override {
-    packageOverrides = pyFinal: pyPrev: {
-      torch = pyPrev.torch-bin;
-      torchvision = pyPrev.torchvision-bin;
-      triton = pyPrev.torch-bin.triton;
-    };
-  };
-in {
+}: {
   home.username = username;
   home.homeDirectory = "/home/${username}";
 
@@ -33,12 +26,7 @@ in {
 
     # python
     uv
-    (python312WithForcedTorch.withPackages (
-      python-pkgs:
-        with python-pkgs; [
-          # torch
-        ]
-    ))
+    python315
     pyrefly
     ruff
 
@@ -47,7 +35,7 @@ in {
     inputs.fenix.packages.${stdenv.hostPlatform.system}.complete.toolchain # rust
     bun
     go
-    nodejs_25
+    nodejs_26
     sqlite
     duckdb
     awscli2
@@ -55,7 +43,6 @@ in {
     hcloud
     jujutsu
     claude-code
-    tree
 
     # Niri
     swaybg
@@ -65,8 +52,10 @@ in {
     pwmenu
   ];
 
-  # Niri
-  xdg.configFile."niri/config.kdl".source = ./niri/config.kdl;
+  xdg = {
+    enable = true;
+    configFile."niri/config.kdl".source = ./niri/config.kdl; # Niri
+  };
 
   programs.fuzzel = {
     enable = true;
@@ -90,51 +79,10 @@ in {
 
   services.mako.enable = true;
 
-  programs.waybar = {
-    enable = false;
-    style = ./niri/waybar.css;
-    settings.mainBar = {
-      layer = "top";
-
-      modules-left = ["niri/workspaces" "tray"];
-      modules-center = ["niri/window"];
-      modules-right = ["network" "bluetooth" "pulseaudio" "clock"];
-
-      clock = {
-        interval = 1;
-        format = "{:%d.%m. W%V %H:%M:%S}";
-        tooltip-format = "{calendar}";
-        calendar = {
-          mode = "year";
-          mode-mon-col = 4;
-          weeks-pos = "right";
-          format = {
-            months = "<span color='#b4befe'><b>{}</b></span>";
-            days = "<span color='#cdd6f4'>{}</span>";
-            weeks = "<span color='#74c7ec'><b>W{}</b></span>";
-            weekdays = "<span color='#89b4fa'><b>{}</b></span>";
-            today = "<span color='#f38ba8'><b><u>{}</u></b></span>";
-          };
-        };
-      };
-
-      network = {
-        format = "▂▄▆ {essid}({signalStrength}%)";
-        tooltip = false;
-      };
-
-      bluetooth = {
-        format = "<b>ᛒ</b> {status}";
-        tooltip-format = "{device_alias}";
-      };
-
-      pulseaudio = {
-        format = "<b>♪</b> {volume}%";
-      };
-    };
+  programs.firefox = {
+    enable = true;
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
   };
-
-  programs.firefox.enable = true;
 
   programs.git = {
     enable = true;
@@ -161,6 +109,7 @@ in {
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
 
     shellAliases = {
       ".." = "cd ..";
@@ -168,7 +117,7 @@ in {
       z = "zed .";
       nixos = "zeditor ~/nixos";
       rebuild = "nh os switch /etc/nixos";
-      ls = "eza -F";
+      ls = "eza -F always";
       cat = "bat";
       grep = "rg";
       help = ''
