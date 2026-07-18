@@ -1,5 +1,4 @@
 {pkgs, ...}: let
-  # momw-tools = pkgs.callPackage ./packages/momw-tools {};
   awakened-poe = pkgs.callPackage ./packages/poe/awakened.nix {};
 in {
   environment.systemPackages = with pkgs; [
@@ -23,4 +22,7 @@ in {
   ];
 
   programs.steam.enable = true;
+  programs.steam.extraCompatPackages = with pkgs; [
+    proton-ge-bin
+  ];
 }
