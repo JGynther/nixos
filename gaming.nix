@@ -1,6 +1,4 @@
-{pkgs, ...}: let
-  awakened-poe = pkgs.callPackage ./packages/poe/awakened.nix {};
-in {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     # Minecraft
     jdk21
@@ -18,7 +16,6 @@ in {
 
     # POE
     rusty-path-of-building
-    awakened-poe
   ];
 
   programs.steam.enable = true;
