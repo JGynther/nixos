@@ -39,6 +39,8 @@ in {
           # torch
         ]
     ))
+    pyrefly
+    ruff
 
     # dev
     clang
@@ -52,11 +54,15 @@ in {
     opentofu
     hcloud
     jujutsu
+    claude-code
+    tree
 
     # Niri
     swaybg
     xwayland-satellite
     nautilus
+    blueman
+    pwmenu
   ];
 
   # Niri
@@ -85,7 +91,7 @@ in {
   services.mako.enable = true;
 
   programs.waybar = {
-    enable = true;
+    enable = false;
     style = ./niri/waybar.css;
     settings.mainBar = {
       layer = "top";
@@ -278,6 +284,50 @@ in {
       buffer_font_family = "Berkeley Mono";
       buffer_font_size = 16;
     };
+  };
+
+  programs.helix = {
+    enable = true;
+    defaultEditor = true;
+
+    settings = {
+      theme = "catppuccin_mocha";
+      editor = {
+        auto-format = true;
+        auto-save = {
+          after-delay.enable = true;
+          focus-lost = true;
+        };
+      };
+    };
+
+    languages = {
+      language-server.pyrefly = {
+        command = "pyrefly";
+        args = ["lsp"];
+      };
+
+      language-server.ruff = {
+        command = "ruff";
+        args = ["server"];
+      };
+
+      language = [
+        {
+          name = "c";
+          auto-format = true;
+        }
+        {
+          name = "python";
+          language-servers = ["pyrefly" "ruff"];
+        }
+      ];
+    };
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 
   programs.atuin = {
