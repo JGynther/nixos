@@ -309,7 +309,7 @@ animations {
 // https://niri-wm.github.io/niri/Configuration:-Window-Rules
 
 // Try to automagically open games nicely
-window-rule {
+/-window-rule {
     match app-id=r#"^steam_app_.*"#
     match app-id="valheim.x86_64"
 
