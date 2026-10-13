@@ -20,9 +20,8 @@
 
   time.timeZone = "Europe/Helsinki";
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_TIME = "fi_FI.UTF-8";
-  };
+  i18n.extraLocaleSettings.LC_TIME = "fi_FI.UTF-8";
+  environment.sessionVariables.GTK_IM_MODULE = "simple"; # dead key support
   console.keyMap = "fi";
   services.xserver.xkb.layout = "fi";
 
@@ -73,6 +72,12 @@
     podman.enable = true;
     podman.defaultNetwork.settings.dns_enabled = true;
   };
+
+  # For keychron VIA/QMK
+  # https://discourse.nixos.org/t/via-vial-cant-find-my-keyboard/52525/4
+  hardware.keyboard.qmk.enable = true;
+  services.udev.packages = with pkgs; [via qmk-udev-rules];
+  environment.systemPackages = with pkgs; [qmk];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

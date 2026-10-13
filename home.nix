@@ -43,6 +43,7 @@
     hcloud
     jujutsu
     claude-code
+    podman-compose
 
     # Niri
     swaybg
@@ -50,11 +51,22 @@
     nautilus
     blueman
     pwmenu
+
+    tutanota-desktop
   ];
 
   xdg = {
     enable = true;
     configFile."niri/config.kdl".source = ./niri/config.kdl; # Niri
+    # For gamescope https://github.com/ValveSoftware/gamescope/issues/1626
+    configFile."gamescope/scripts/disable-explicit-sync-nvidia.lua".text = ''
+      function info(text)
+          gamescope.log(gamescope.log_priority.info, text)
+      end
+
+      info("Disabling explicit sync (NVIDIA workaround): " .. tostring(gamescope.convars.drm_debug_disable_explicit_sync.value) .. " -> true")
+      gamescope.convars.drm_debug_disable_explicit_sync.value = true
+    '';
   };
 
   programs.fuzzel = {
@@ -84,14 +96,15 @@
     configPath = "${config.xdg.configHome}/mozilla/firefox";
   };
 
+  programs.chromium.enable = true;
+
   programs.git = {
     enable = true;
-
     settings = {
       init.defaultBranch = "main";
       user = {
         name = "Joona Gynther";
-        email = "joona@gynther.xyz";
+        email = "joona@gynther.org";
       };
     };
     maintenance.enable = true;
@@ -140,9 +153,8 @@
       font-size = 14;
       background-opacity = 0.95;
       background-blur-radius = 20;
-      window-padding-x = 30;
-      window-padding-y = 10;
-      window-height = 40;
+      window-padding-x = 4;
+      window-padding-y = 4;
     };
   };
 
@@ -269,6 +281,10 @@
         {
           name = "python";
           language-servers = ["pyrefly" "ruff"];
+        }
+        {
+          name = "nix";
+          formatter.command = "alejandra";
         }
       ];
     };
