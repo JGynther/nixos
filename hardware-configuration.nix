@@ -25,27 +25,39 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/26822239-1645-48b1-ac7d-7105d793e267";
+    device = "/dev/disk/by-uuid/30803e36-5c7a-4606-9445-d9354203cd75";
     fsType = "ext4";
   };
 
-  fileSystems."/mnt/nvme" = {
+  fileSystems."/mnt/bulk" = {
+    device = "/dev/disk/by-uuid/d6305b96-5e05-4d5a-ac58-c0e58e032221";
+    fsType = "ext4";
+    options = ["nofail"];
+  };
+
+  fileSystems."/mnt/fast" = {
     device = "/dev/disk/by-uuid/f1c1e6e0-ea2e-4dcc-b1ac-a548b7055435";
     fsType = "ext4";
   };
 
-  fileSystems."/home/${username}/mlg" = {
-    device = "/mnt/nvme";
+  fileSystems."/home/${username}/mlg/fast" = {
+    device = "/mnt/fast";
+    options = ["bind"];
+    fsType = "ext4";
+  };
+
+  fileSystems."home/${username}/mlg/bulk" = {
+    device = "/mnt/bulk";
     options = ["bind"];
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/12E6-6D8E";
+    device = "/dev/disk/by-uuid/F603-28E9";
     fsType = "vfat";
     options = [
-      "fmask=0022"
-      "dmask=0022"
+      "fmask=0077"
+      "dmask=0077"
     ];
   };
 
