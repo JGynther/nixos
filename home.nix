@@ -5,7 +5,21 @@
   inputs,
   config,
   ...
-}: {
+}: let
+  berkeleyMonoFont = pkgs.stdenvNoCC.mkDerivation {
+    pname = "berkeley-mono-font";
+    version = "2.0";
+    src = ./fonts/berkeleymono.zip;
+
+    nativeBuildInputs = [ pkgs.unzip ];
+    dontUnpack = true;
+
+    installPhase = ''
+      mkdir -p "$out/share/fonts/opentype"
+      unzip -j "$src" '*.otf' -d "$out/share/fonts/opentype/"
+    '';
+  };
+in {
   home.username = username;
   home.homeDirectory = "/home/${username}";
 
@@ -53,6 +67,8 @@
     pwmenu
 
     tutanota-desktop
+
+    berkeleyMonoFont
   ];
 
   xdg = {
@@ -68,6 +84,14 @@
       gamescope.convars.drm_debug_disable_explicit_sync.value = true
     '';
   };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
+  fonts.fontconfig.enable = true;
 
   programs.fuzzel = {
     enable = true;
