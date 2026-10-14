@@ -322,6 +322,13 @@ in {
   programs.atuin = {
     enable = true;
     enableZshIntegration = true;
+    daemon.enable = true;
+    settings = {
+      search_mode = "daemon-fuzzy";
+      style = "compact";
+      inline_height = 20;
+      show_tabs = false;
+    };
   };
 
   # Discord
